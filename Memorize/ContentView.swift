@@ -8,14 +8,41 @@
 import SwiftUI
 
 struct ContentView: View {
+	@State private var emojiCount = 4
+	
 	var body: some View {
-		HStack {
-			CardView()
-			CardView()
-			CardView()
-			CardView()
+		VStack {
+			HStack {
+				ForEach(emojis[0..<emojiCount], id: \.self) { emoji in
+					CardView(content: emoji)
+				}
+			}
+			HStack {
+				Button {
+					if emojiCount > 1 {
+						emojiCount -= 1
+					}
+				} label: {
+					VStack {
+						Image(systemName: "minus.circle")
+							.font(.largeTitle)
+					}
+				}
+				Spacer()
+				Button{
+					if emojiCount < emojis.count {
+						emojiCount += 1
+					}
+				} label: {
+					VStack {
+						Image(systemName: "plus.circle")
+							.font(.largeTitle)
+					}
+				}
+			}
+			.padding()
 		}
-		.padding()
+		.padding(.horizontal)
 	}
 }
 

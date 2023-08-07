@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct CardView: View {
-	var isFaceUp: Bool = true
+	var content: String
+	@State var isFaceUp: Bool = true
 	
 	var body: some View {
 		ZStack {
@@ -17,22 +18,24 @@ struct CardView: View {
 			if isFaceUp {
 				shape
 					.stroke(lineWidth: 3)
-					.foregroundColor(/*@START_MENU_TOKEN@*/.red/*@END_MENU_TOKEN@*/)
-				Text("🧳")
+					.foregroundColor(.red)
+				Text(content)
 					.font(.largeTitle)
-					.fontWeight(.semibold)
 			} else {
 				shape
 					.fill()
 			}
 			
 		}
-		.padding()
+		.onTapGesture {
+			isFaceUp = !isFaceUp
+		}
 	}
 }
 
 struct CardView_Previews: PreviewProvider {
     static var previews: some View {
-		CardView()
+		CardView(content: "🧳")
+			.padding(.horizontal)
     }
 }
