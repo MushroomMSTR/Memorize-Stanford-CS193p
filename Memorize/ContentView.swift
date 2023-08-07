@@ -9,20 +9,21 @@ import SwiftUI
 
 struct ContentView: View {
 	var body: some View {
-		ZStack {
-			RoundedRectangle(cornerRadius: 20)
-				.stroke(lineWidth: 3)
-				.foregroundColor(/*@START_MENU_TOKEN@*/.red/*@END_MENU_TOKEN@*/)
-			Text("Hello CS190")
-				.font(.largeTitle)
-				.fontWeight(.semibold)
+		HStack {
+			CardView()
+			CardView()
+			CardView()
+			CardView()
 		}
-		.padding(.horizontal)
+		.padding()
 	}
 }
 
 struct ContentView_Previews: PreviewProvider {
 	static var previews: some View {
 		ContentView()
+			.preferredColorScheme(.light)
+		ContentView()
+			.preferredColorScheme(.dark)
 	}
 }
