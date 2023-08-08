@@ -11,7 +11,7 @@ struct MemoryGame<CardContent> {
 	var cards: Array<Card>
 	
 	func choose(_ card: Card) {
-		
+		print("😉")
 	}
 	
 	init(numberOfPairsOfCards: Int, createCardContent: (Int) -> CardContent) {
@@ -26,7 +26,7 @@ struct MemoryGame<CardContent> {
 	
 	struct Card: Identifiable {
 		var id: Int
-		var isFaceUp: Bool = false
+		var isFaceUp: Bool = true
 		var isMatched: Bool = false
 		var content: CardContent
 	}
