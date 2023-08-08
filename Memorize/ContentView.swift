@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct ContentView: View {
-	@State private var emojiCount = EmojiMemoryGame.emojis.count
+	let viewModel: EmojiMemoryGame
 	
 	var body: some View {
 		VStack {
 			ScrollView {
 				LazyVGrid(columns: [GridItem(.adaptive(minimum: 100))]) {
-					ForEach(EmojiMemoryGame.emojis[0..<emojiCount], id: \.self) { emoji in
-						CardView(content: emoji)
+					ForEach(viewModel.cards) { card in
+						CardView(card: card)
 							.aspectRatio(2/3, contentMode: .fit)
 					}
 				}
@@ -27,9 +27,11 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
 	static var previews: some View {
-		ContentView()
+		let game = EmojiMemoryGame()
+		
+		ContentView(viewModel: game)
 			.preferredColorScheme(.light)
-		ContentView()
+		ContentView(viewModel: game)
 			.preferredColorScheme(.dark)
 	}
 }
