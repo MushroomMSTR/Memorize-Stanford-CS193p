@@ -20,31 +20,6 @@ struct ContentView: View {
 					}
 				}
 			}
-			Spacer()
-			HStack {
-				Button {
-					if emojiCount > 1 {
-						emojiCount -= 1
-					}
-				} label: {
-					VStack {
-						Image(systemName: "minus.circle")
-							.font(.largeTitle)
-					}
-				}
-				Spacer()
-				Button{
-					if emojiCount < emojis.count {
-						emojiCount += 1
-					}
-				} label: {
-					VStack {
-						Image(systemName: "plus.circle")
-							.font(.largeTitle)
-					}
-				}
-			}
-			.padding()
 		}
 		.padding(.horizontal)
 	}
