@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct ContentView: View {
-	@State private var emojiCount = emojis.count
+	@State private var emojiCount = EmojiMemoryGame.emojis.count
 	
 	var body: some View {
 		VStack {
 			ScrollView {
 				LazyVGrid(columns: [GridItem(.adaptive(minimum: 100))]) {
-					ForEach(emojis[0..<emojiCount], id: \.self) { emoji in
+					ForEach(EmojiMemoryGame.emojis[0..<emojiCount], id: \.self) { emoji in
 						CardView(content: emoji)
 							.aspectRatio(2/3, contentMode: .fit)
 					}
