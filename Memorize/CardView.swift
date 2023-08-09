@@ -29,9 +29,10 @@ struct CardView: View {
 	}
 }
 
-//struct CardView_Previews: PreviewProvider {
-//    static var previews: some View {
-//		CardView(card: "🧳")
-//			.padding(.horizontal)
-//    }
-//}
+struct CardView_Previews: PreviewProvider {
+	static var previews: some View {
+		let testCard = MemoryGame<String>.Card(id: 0, content: "🧳")
+		CardView(card: testCard)
+			.padding(.horizontal)
+	}
+}
