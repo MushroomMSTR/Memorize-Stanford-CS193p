@@ -24,6 +24,7 @@ struct ContentView: View {
 				}
 			}
 		}
+		.foregroundColor(.red)
 		.padding(.horizontal)
 	}
 }
