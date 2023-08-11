@@ -17,23 +17,13 @@ struct CardView: View {
 	var body: some View {
 		GeometryReader { geometry in
 			ZStack {
-				let shape = RoundedRectangle(cornerRadius: 10)
-				
-				if card.isFaceUp {
-					shape
-						.strokeBorder(lineWidth: 3)
-						.foregroundColor(.red)
-					Pie(startAngle: Angle(degrees: 0-90), endAngle: Angle(degrees: 110-90))
-						.padding(5)
-						.opacity(0.5)
-					Text(card.content)
-						.font(Font.system(size: min(geometry.size.width, geometry.size.height) * 0.75))
-				} else if card.isMatched {
-					shape.opacity(0)
-				} else {
-					shape.fill()
-				}
+				Pie(startAngle: Angle(degrees: 0-90), endAngle: Angle(degrees: 110-90))
+					.padding(5)
+					.opacity(0.5)
+				Text(card.content)
+					.font(Font.system(size: min(geometry.size.width, geometry.size.height) * 0.75))
 			}
+			.modifier(Cardify(isFaceUp: card.isFaceUp))
 		}
 	}
 }
