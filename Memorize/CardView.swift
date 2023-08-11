@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CardView: View {
-	let card: MemoryGame<String>.Card
+	let card: EmojiMemoryGame.Card
 	
 	var body: some View {
 		ZStack {
