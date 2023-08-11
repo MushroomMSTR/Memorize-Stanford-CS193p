@@ -7,13 +7,17 @@
 
 import SwiftUI
 
+// MARK: - CardView Structure
 struct CardView: View {
+	// MARK: - Properties
 	let card: EmojiMemoryGame.Card
 	
+	// MARK: - Initialization
 	init(_ card: EmojiMemoryGame.Card) {
 		self.card = card
 	}
 	
+	// MARK: - Body
 	var body: some View {
 		GeometryReader { geometry in
 			ZStack {
@@ -28,6 +32,7 @@ struct CardView: View {
 	}
 }
 
+// MARK: - Preview Provider
 struct CardView_Previews: PreviewProvider {
 	static var previews: some View {
 		let testCard = EmojiMemoryGame.Card(isFaceUp: true, isMatched: false, id: 0, content: "🧳") // make sure to set isFaceUp and isMatched according to your requirement

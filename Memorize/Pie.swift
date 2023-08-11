@@ -7,11 +7,14 @@
 
 import SwiftUI
 
+// MARK: - Pie Shape
 struct Pie: Shape {
+	// MARK: - Properties
 	var startAngle: Angle
 	var endAngle: Angle
 	var clockwise: Bool = false
 	
+	// MARK: - Animatable Data
 	var animatableData: AnimatablePair<Double, Double> {
 		get {
 			AnimatablePair(startAngle.radians, endAngle.radians)
@@ -22,6 +25,7 @@ struct Pie: Shape {
 		}
 	}
 	
+	// MARK: - Path Creation
 	func path(in rect: CGRect) -> Path {
 		let center = CGPoint(x: rect.midX, y: rect.midY)
 		let radius = min(rect.width, rect.height) / 2
@@ -30,6 +34,7 @@ struct Pie: Shape {
 			y: center.y + radius * CGFloat(sin(startAngle.radians))
 		)
 		
+		// MARK: - Path Construction
 		var p = Path()
 		p.move(to: center)
 		p.addLine(to: start)

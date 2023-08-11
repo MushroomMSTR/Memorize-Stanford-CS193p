@@ -7,7 +7,9 @@
 
 import Foundation
 
+// MARK: - Memory Game
 struct MemoryGame<CardContent: Equatable> {
+	// MARK: - Properties
 	private(set) var cards: Array<Card>
 	
 	private var indexOfTheOneAndOnlyFaceUpCard: Int? {
@@ -24,6 +26,7 @@ struct MemoryGame<CardContent: Equatable> {
 		}
 	}
 	
+	// MARK: - Card Management
 	mutating func choose(_ card: Card) {
 		if let chosenIndex = cards.firstIndex(where: { $0.id == card.id }), !cards[chosenIndex].isFaceUp,
 		   !cards[chosenIndex].isMatched {
@@ -51,6 +54,7 @@ struct MemoryGame<CardContent: Equatable> {
 		return 0
 	}
 	
+	// MARK: - Initialization
 	init(numberOfPairsOfCards: Int, createCardContent: (Int) -> CardContent) {
 		cards = []
 		
@@ -61,6 +65,7 @@ struct MemoryGame<CardContent: Equatable> {
 		}
 	}
 	
+	// MARK: - Card Struct
 	struct Card: Identifiable {
 		var isFaceUp = false
 		var isMatched = false

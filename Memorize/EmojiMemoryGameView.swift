@@ -7,9 +7,12 @@
 
 import SwiftUI
 
+// MARK: - EmojiMemoryGameView Struct
 struct EmojiMemoryGameView: View {
+	// MARK: - Observed Game Object
 	@ObservedObject var game: EmojiMemoryGame
 	
+	// MARK: - View Body
 	var body: some View {
 		AspectVGrid(items: game.cards, aspectRatio: 2/3) { card in
 			if card.isMatched && !card.isFaceUp {
@@ -27,6 +30,7 @@ struct EmojiMemoryGameView: View {
 	}
 }
 
+// MARK: - Preview Provider
 struct EmojiMemoryGameView_Previews: PreviewProvider {
 	static var previews: some View {
 		let game = EmojiMemoryGame()

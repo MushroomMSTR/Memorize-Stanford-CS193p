@@ -7,21 +7,26 @@
 
 import SwiftUI
 
+// MARK: - AspectVGrid Structure
 struct AspectVGrid<Item, ItemView>: View where ItemView: View, Item: Identifiable {
+	// MARK: - Properties
 	var items: [Item]
 	var aspectRatio: CGFloat
 	var content: (Item) -> ItemView
 	
+	// MARK: - Initialization
 	init(items: [Item], aspectRatio: CGFloat, @ViewBuilder content: @escaping (Item) -> ItemView) {
 		self.items = items
 		self.aspectRatio = aspectRatio
 		self.content = content
 	}
 	
+	// MARK: - Body
 	var body: some View {
 		GeometryReader { geometry in
 			VStack {
 				let width: CGFloat = widthThatFits(itemCount: items.count, in: geometry.size, itemAspectRatio: aspectRatio)
+				// MARK: - LazyVGrid
 				LazyVGrid(columns: [adaptiveGridItem(width: width)], spacing: 0) {
 					ForEach(items) { item in
 						content(item).aspectRatio(aspectRatio, contentMode: .fit)
@@ -32,12 +37,14 @@ struct AspectVGrid<Item, ItemView>: View where ItemView: View, Item: Identifiabl
 		}
 	}
 	
+	// MARK: - Grid Item Adaptation
 	private func adaptiveGridItem(width: CGFloat) -> GridItem {
 		var gridItem = GridItem(.adaptive(minimum: width))
 		gridItem.spacing = 0
 		return gridItem
 	}
 	
+	// MARK: - Width Calculation
 	private func widthThatFits(itemCount: Int, in size: CGSize, itemAspectRatio: CGFloat) -> CGFloat {
 		var columnCount = 1
 		var rowCount = itemCount
