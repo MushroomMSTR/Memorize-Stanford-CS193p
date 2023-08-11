@@ -25,10 +25,21 @@ struct CardView: View {
 					.padding(5)
 					.opacity(0.5)
 				Text(card.content)
-					.font(Font.system(size: min(geometry.size.width, geometry.size.height) * 0.75))
+					.rotationEffect(Angle.degrees(card.isMatched ? 360 : 0))
+					.animation(Animation.linear(duration: 1).repeatForever(autoreverses: false), value: card.isMatched)
+					.font(Font.system(size: DrawingConstants.fontSize))
+					.scaleEffect(scale(thatFits: geometry.size))
 			}
 			.cardify(isFaceUp: card.isFaceUp)
 		}
+	}
+	private func scale(thatFits size: CGSize) -> CGFloat {
+		min(size.width, size.height) / (DrawingConstants.fontSize / DrawingConstants.fontScale)
+	}
+	
+	private struct DrawingConstants {
+		static let fontScale: CGFloat = 0.7
+		static let fontSize: CGFloat = 32
 	}
 }
 
