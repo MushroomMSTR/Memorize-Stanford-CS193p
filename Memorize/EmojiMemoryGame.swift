@@ -30,7 +30,7 @@ class EmojiMemoryGame: ObservableObject {
 		}
 	}
 	
-	@Published private var model: MemoryGame<String> = EmojiMemoryGame.createMemoryGame()
+	@Published private var model = EmojiMemoryGame.createMemoryGame()
 	
 	var cards: Array<Card> {
 		model.cards

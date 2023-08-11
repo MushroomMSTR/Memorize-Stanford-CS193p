@@ -10,6 +10,10 @@ import SwiftUI
 struct CardView: View {
 	let card: EmojiMemoryGame.Card
 	
+	init(_ card: EmojiMemoryGame.Card) {
+		self.card = card
+	}
+	
 	var body: some View {
 		ZStack {
 			let shape = RoundedRectangle(cornerRadius: 20)
@@ -32,7 +36,7 @@ struct CardView: View {
 struct CardView_Previews: PreviewProvider {
 	static var previews: some View {
 		let testCard = MemoryGame<String>.Card(id: 0, content: "🧳")
-		CardView(card: testCard)
+		CardView(testCard)
 			.padding(.horizontal)
 	}
 }
