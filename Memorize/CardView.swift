@@ -23,6 +23,9 @@ struct CardView: View {
 					shape
 						.strokeBorder(lineWidth: 3)
 						.foregroundColor(.red)
+					Pie(startAngle: Angle(degrees: 0), endAngle: Angle(degrees: 110), clockwise: true)
+						.padding(5)
+						.opacity(0.4)
 					Text(card.content)
 						.font(Font.system(size: min(geometry.size.width, geometry.size.height) * 0.75))
 				} else if card.isMatched {
