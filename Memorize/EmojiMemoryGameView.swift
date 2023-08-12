@@ -39,7 +39,9 @@ struct EmojiMemoryGameView: View {
 	
 	var shuffle: some View {
 		Button("Shuffle") {
-			game.shuffle()
+			withAnimation(.easeInOut(duration: 1.0)) {
+				game.shuffle()
+			}
 		}
 	}
 }
