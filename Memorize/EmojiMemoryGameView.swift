@@ -30,7 +30,9 @@ struct EmojiMemoryGameView: View {
 				CardView(card)
 					.padding(4)
 					.onTapGesture {
-						game.choose(card)
+						withAnimation {
+							game.choose(card)
+						}
 					}
 			}
 		}
@@ -39,7 +41,7 @@ struct EmojiMemoryGameView: View {
 	
 	var shuffle: some View {
 		Button("Shuffle") {
-			withAnimation(.easeInOut(duration: 1.0)) {
+			withAnimation(.easeInOut(duration: 0.5)) {
 				game.shuffle()
 			}
 		}
