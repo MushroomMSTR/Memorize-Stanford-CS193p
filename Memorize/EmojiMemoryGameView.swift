@@ -23,6 +23,14 @@ struct EmojiMemoryGameView: View {
 		!dealt.contains(card.id)
 	}
 	
+	private func dealAnimation(for card: EmojiMemoryGame.Card) -> Animation {
+		var delay = 0.0
+		if let index = game.cards.firstIndex(where: { $0.id == card.id }) {
+			delay = Double(index) * (CardConstants.totalDealDuration / Double(game.cards.count))
+		}
+		return Animation.easeInOut(duration: CardConstants.dealDuration).delay(delay)
+	}
+	
 	// MARK: - Observed Game Object
 	@ObservedObject var game: EmojiMemoryGame
 	
@@ -69,8 +77,8 @@ struct EmojiMemoryGameView: View {
 		.foregroundColor(CardConstants.color)
 		.onTapGesture {
 			// "deal" cards
-			withAnimation(.easeInOut(duration: 5)) {
-				for card in game.cards {
+			for card in game.cards {
+				withAnimation(dealAnimation(for: card)) {
 					deal(card)
 				}
 			}
