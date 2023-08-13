@@ -9,6 +9,18 @@ import SwiftUI
 
 // MARK: - EmojiMemoryGameView Struct
 struct EmojiMemoryGameView: View {
+	
+	// MARK: - Dealing Functions
+	@State private var dealt = Set<Int>()
+	
+	private func deal(_ card: EmojiMemoryGame.Card) {
+		dealt.insert(card.id)
+	}
+	
+	private func isUndealt(_ card: EmojiMemoryGame.Card) -> Bool {
+		!dealt.contains(card.id)
+	}
+	
 	// MARK: - Observed Game Object
 	@ObservedObject var game: EmojiMemoryGame
 	
@@ -20,16 +32,6 @@ struct EmojiMemoryGameView: View {
 			shuffle
 		}
 		.padding()
-	}
-	
-	@State private var dealt = Set<Int>()
-	
-	private func deal(_ card: EmojiMemoryGame.Card) {
-		dealt.insert(card.id)
-	}
-	
-	private func isUndealt(_ card: EmojiMemoryGame.Card) -> Bool {
-		!dealt.contains(card.id)
 	}
 	
 	// MARK: - Game Body
@@ -71,6 +73,7 @@ struct EmojiMemoryGameView: View {
 		}
 	}
 	
+	// MARK: - Shuffle Button
 	var shuffle: some View {
 		Button("Shuffle") {
 			withAnimation(.easeInOut(duration: 0.5)) {
@@ -79,6 +82,7 @@ struct EmojiMemoryGameView: View {
 		}
 	}
 	
+	// MARK: - Card Constants
 	private struct CardConstants {
 		static let color = Color.red
 		static let aspectRatio: CGFloat = 2/3
