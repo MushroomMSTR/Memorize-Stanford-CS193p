@@ -72,8 +72,20 @@ struct MemoryGame<CardContent: Equatable> {
 	
 	// MARK: - Card Struct
 	struct Card: Identifiable {
-		var isFaceUp = false
-		var isMatched = false
+		var isFaceUp = false {
+			didSet {
+				if isFaceUp {
+					startUsingBonusTime()
+				} else {
+					stopUsingBonusTime()
+				}
+			}
+		}
+		var isMatched = false {
+			didSet {
+				stopUsingBonusTime()
+			}
+		}
 		let id: Int
 		let content: CardContent
 		// MARK: - Bonus Time
