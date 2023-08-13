@@ -31,6 +31,10 @@ struct EmojiMemoryGameView: View {
 		return Animation.easeInOut(duration: CardConstants.dealDuration).delay(delay)
 	}
 	
+	private func zIndex(of card: EmojiMemoryGame.Card) -> Double {
+		-Double(game.cards.firstIndex(where: { $0.id == card.id }) ?? 0)
+	}
+	
 	// MARK: - Observed Game Object
 	@ObservedObject var game: EmojiMemoryGame
 	
@@ -54,8 +58,9 @@ struct EmojiMemoryGameView: View {
 					.matchedGeometryEffect(id: card.id, in: dealingNamespace)
 					.padding(4)
 					.transition(AnyTransition.asymmetric(insertion: .identity, removal: .scale))
+					.zIndex(zIndex(of: card))
 					.onTapGesture {
-						withAnimation(.easeInOut(duration: 0.5)) {
+						withAnimation {
 							game.choose(card)
 						}
 					}
@@ -71,6 +76,7 @@ struct EmojiMemoryGameView: View {
 				CardView(card)
 					.matchedGeometryEffect(id: card.id, in: dealingNamespace)
 					.transition(AnyTransition.asymmetric(insertion: .opacity, removal: .identity))
+					.zIndex(zIndex(of: card))
 			}
 		}
 		.frame(width: CardConstants.undealtWidth, height: CardConstants.undealtHeight)
