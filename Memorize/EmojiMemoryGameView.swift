@@ -16,6 +16,7 @@ struct EmojiMemoryGameView: View {
 	var body: some View {
 		VStack {
 			gameBody
+			deckBody
 			shuffle
 		}
 		.padding()
@@ -39,7 +40,7 @@ struct EmojiMemoryGameView: View {
 			} else {
 				CardView(card)
 					.padding(4)
-					.transition(AnyTransition.asymmetric(insertion: .scale, removal: .opacity).animation(.easeInOut(duration: 2)))
+					.transition(AnyTransition.asymmetric(insertion: .scale, removal: .opacity).animation(.easeInOut(duration: 5)))
 					.onTapGesture {
 						withAnimation(.easeInOut(duration: 0.5)) {
 							game.choose(card)
@@ -49,11 +50,26 @@ struct EmojiMemoryGameView: View {
 		}
 		.onAppear {
 			// "deal" cards
-			for card in game.cards {
-				deal(card)
+			withAnimation(.easeInOut(duration: 5)) {
+				for card in game.cards {
+					deal(card)
+				}
 			}
 		}
-		.foregroundColor(.red)
+		.foregroundColor(CardConstants.color)
+	}
+	
+	// MARK: - Deck Body
+	var deckBody: some View {
+		ZStack {
+			ForEach(game.cards.filter(isUndealt)) { card in
+				CardView(card)
+					.transition(AnyTransition.asymmetric(insertion: .opacity, removal: .scale))
+			}
+		}
+		.frame(width: CardConstants.undealtWidth, height: CardConstants.undealtHeight)
+		.foregroundColor(CardConstants.color)
+		
 	}
 	
 	var shuffle: some View {
@@ -62,6 +78,15 @@ struct EmojiMemoryGameView: View {
 				game.shuffle()
 			}
 		}
+	}
+	
+	private struct CardConstants {
+		static let color = Color.red
+		static let aspectRatio: CGFloat = 2/3
+		static let dealDuration: Double = 0.5
+		static let totalDealDuration: Double = 2
+		static let undealtHeight: CGFloat = 90
+		static let undealtWidth = undealtHeight * aspectRatio
 	}
 }
 
