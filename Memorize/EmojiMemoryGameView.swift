@@ -11,6 +11,8 @@ import SwiftUI
 struct EmojiMemoryGameView: View {
 	
 	// MARK: - Dealing Functions
+	@Namespace private var dealingNamespace
+	
 	@State private var dealt = Set<Int>()
 	
 	private func deal(_ card: EmojiMemoryGame.Card) {
@@ -41,8 +43,9 @@ struct EmojiMemoryGameView: View {
 				Color.clear
 			} else {
 				CardView(card)
+					.matchedGeometryEffect(id: card.id, in: dealingNamespace)
 					.padding(4)
-					.transition(AnyTransition.asymmetric(insertion: .scale, removal: .opacity).animation(.easeInOut(duration: 5)))
+					.transition(AnyTransition.asymmetric(insertion: .identity, removal: .scale))
 					.onTapGesture {
 						withAnimation(.easeInOut(duration: 0.5)) {
 							game.choose(card)
@@ -58,7 +61,8 @@ struct EmojiMemoryGameView: View {
 		ZStack {
 			ForEach(game.cards.filter(isUndealt)) { card in
 				CardView(card)
-					.transition(AnyTransition.asymmetric(insertion: .opacity, removal: .scale))
+					.matchedGeometryEffect(id: card.id, in: dealingNamespace)
+					.transition(AnyTransition.asymmetric(insertion: .opacity, removal: .identity))
 			}
 		}
 		.frame(width: CardConstants.undealtWidth, height: CardConstants.undealtHeight)
@@ -76,7 +80,7 @@ struct EmojiMemoryGameView: View {
 	// MARK: - Shuffle Button
 	var shuffle: some View {
 		Button("Shuffle") {
-			withAnimation(.easeInOut(duration: 0.5)) {
+			withAnimation {
 				game.shuffle()
 			}
 		}
