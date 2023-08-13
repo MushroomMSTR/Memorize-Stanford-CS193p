@@ -46,7 +46,7 @@ struct CardView: View {
 // MARK: - Preview Provider
 struct CardView_Previews: PreviewProvider {
 	static var previews: some View {
-		let testCard = EmojiMemoryGame.Card(isFaceUp: true, isMatched: false, id: 0, content: "🧳") // make sure to set isFaceUp and isMatched according to your requirement
+		let testCard = EmojiMemoryGame.Card(isFaceUp: true, isMatched: false, id: 0, content: "🧳")
 		CardView(testCard)
 			.padding(.horizontal)
 	}
